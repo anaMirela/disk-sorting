@@ -14,7 +14,7 @@ public class Application {
     private static Logger logger = LoggerFactory.getLogger(Application.class);
 
     private static String CMD_INSTRUCTIONS = "Program requires 2 arguments as:\n" +
-            "java -jar disk-sorting -generate <file-size>\n" +
+            "java -jar disk-sorting -generate <file-size>(in bytes)\n" +
             "java -jar disk-sorting -sort <file-name>";
 
     private static String CMD_GENERATE = "-generate";
