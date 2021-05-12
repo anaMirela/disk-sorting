@@ -1,0 +1,43 @@
+1. Introduction
+This application is sorting a big input file of integers.
+Constraints:
+    - Maximum memory is -Xmx100m
+    - Numbers are integers
+    - File can be up to 1GB
+
+2. Running the application
+Build command: mvn clean package
+Run using the resulting jar file:
+- To generate a random integers file of a given size
+    java -jar disk-sorting-1.0-SNAPSHOT.jar -generate <file-size>
+- To sort integers in a file
+    java -jar disk-sorting-1.0-SNAPSHOT.jar -sort <file-name>
+
+3. Solution description
+ChunkSorter is a class that will sort the numbers from the input file, from
+a specific range startLine to endLine. The output is an intermediary sorted file.
+
+FileSorter class is doing the sorting in the following way:
+    - Create a threadpool that will pick up tasks
+    - Tasks are chunks of the file that will be sorted individually
+     using ChunkSorter class
+    - After all the parts are sorted, the intermediary files will be merged using the merging algorithm
+    - Delete all intermediary files
+
+Merging algorithm is using the following data structures:
+    - an array of RandomAccessFile for reading from the intermediary files
+    - an array indexes representing how much we read from every file
+    - an array of booleans representing the files that are completely read
+
+The algorithm is opening all the intermediary files, searching for minimum among the
+numbers written at the current indexes. When finding the minimum, the index for the
+file where it was found it's moved to the next line and the minimum is written to the
+resulting file.
+
+4. Improvements
+- Merging algorithm should be improved in order to use a multi-threading approach.
+A possible solution is to merge first pairs of files in parallel, and then move up
+until obtaining a single file.
+
+5. Testing
+- Testing with 10MB as a input file resulted in 8 minutes of processing time
