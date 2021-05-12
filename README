@@ -9,9 +9,9 @@ Constraints:
 Build command: mvn clean package
 Run using the resulting jar file:
 - To generate a random integers file of a given size
-    java -jar disk-sorting-1.0-SNAPSHOT.jar -generate <file-size>
+    java -jar disk-sorting.jar -generate <file-size>
 - To sort integers in a file
-    java -jar disk-sorting-1.0-SNAPSHOT.jar -sort <file-name>
+    java -jar disk-sorting.jar -sort <file-name>
 
 3. Solution description
 ChunkSorter is a class that will sort the numbers from the input file, from
